@@ -1,7 +1,7 @@
 class Task {
   final int id;
   final String title;
-  final bool completed;
+  bool completed;
 
   Task({
     required this.id,
@@ -17,3 +17,4 @@ class Task {
     );
   }
 }
+

@@ -57,6 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void toggleTask(int index, bool value) {
+  setState(() {
+    tasks[index].completed = value;
+  });
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       body: _buildBody(),
-
 
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(6),
@@ -90,12 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
     if (errorMessage != null) {
       return Center(child: Text(errorMessage!));
     }
-
   
     return IndexedStack(
       index: currentIndex,
       children: [
-        AllTasksTab(tasks: tasks),
+        AllTasksTab(tasks: tasks, onToggle: toggleTask),
         CompletedTasksTab(tasks: tasks),
         StatsTab(tasks: tasks),
       ],
