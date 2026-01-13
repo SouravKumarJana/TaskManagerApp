@@ -8,20 +8,17 @@ class CompletedTasksTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final completedTasks =
-        tasks.where((task) => task.completed).toList();
+    final completed = tasks.where((t) => t.completed).toList();
 
-    if (completedTasks.isEmpty) {
+    if (completed.isEmpty) {
       return const Center(child: Text('No completed tasks'));
     }
 
     return ListView.builder(
-      itemCount: completedTasks.length,
+      itemCount: completed.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          leading: const Icon(Icons.check_circle, color: Colors.green),
-          title: Text(completedTasks[index].title),
-        );
+        final task = completed[index];
+        return ListTile(title: Text(task.title));
       },
     );
   }

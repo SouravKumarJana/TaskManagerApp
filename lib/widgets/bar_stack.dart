@@ -15,12 +15,16 @@ class BarStack extends StatelessWidget {
           onPressed: () => onIndexChanged(0),
         ),
         IconButton(
-          icon: const Icon(Icons.check_circle),
+          icon: const Icon(Icons.add),
           onPressed: () => onIndexChanged(1),
         ),
         IconButton(
-          icon: const Icon(Icons.bar_chart),
+          icon: const Icon(Icons.check_circle),
           onPressed: () => onIndexChanged(2),
+        ),
+        IconButton(
+          icon: const Icon(Icons.bar_chart),
+          onPressed: () => onIndexChanged(3),
         ),
       ],
     );
