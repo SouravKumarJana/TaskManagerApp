@@ -87,13 +87,15 @@ class _AddTaskTabState extends State<AddTaskTab> {
               ),
             ),
 
-          SizedBox(height: 20,),
+          //SizedBox(height: 20,),
+          Spacer(),
 
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               onPressed: submitTask,
-              child: const Text('Add Task'),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
+              child: const Text('Add Task', style: TextStyle(color: Colors.white),),
             ),
           ),
         ],
