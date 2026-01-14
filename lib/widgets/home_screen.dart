@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
               tasks: controller.tasks,
               onToggle: controller.toggleTask,
               ),
-              AddTaskTab(onAdd: controller.addTask), // 📅 Date & time picker HERE
+              AddTaskTab(onAdd: controller.addTask), 
               CompletedTasksTab(tasks: controller.tasks),
               StatsTab(tasks: controller.tasks),
               ],

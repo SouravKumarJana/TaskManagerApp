@@ -1,19 +1,19 @@
 class Task {
   final String title;
   bool completed;
-  final DateTime createdAt;
+  final DateTime dueTime;
 
   Task({
     required this.title,
     this.completed = false,
-    required this.createdAt,
+    required this.dueTime,
   });
 
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
       title: json['title'],
       completed: json['completed'],
-      createdAt: DateTime.parse(json['createdAt']),
+      dueTime: DateTime.parse(json['dueTime']),
     );
   }
 
@@ -21,7 +21,7 @@ class Task {
     return {
       'title': title,
       'completed': completed,
-      'createdAt': createdAt.toIso8601String(),
+      'dueTime': dueTime.toIso8601String(),
     };
   }
 }

@@ -23,7 +23,7 @@ class TaskController extends ChangeNotifier {
     tasks.add(
       Task(
         title: title,
-        createdAt: dateTime,
+        dueTime: dateTime,
       ),
     );
 

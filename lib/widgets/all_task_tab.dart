@@ -28,7 +28,7 @@ class AllTasksTab extends StatelessWidget {
 
         return CheckboxListTile(
           title: Text(task.title),
-          subtitle: Text(formatDate(task.createdAt)),
+          subtitle: Text(formatDate(task.dueTime)),
           value: task.completed,
           onChanged: (v) => onToggle(index, v ?? false),
         );

@@ -87,7 +87,7 @@ class _AddTaskTabState extends State<AddTaskTab> {
               ),
             ),
 
-          const Spacer(),
+          SizedBox(height: 20,),
 
           SizedBox(
             width: double.infinity,
