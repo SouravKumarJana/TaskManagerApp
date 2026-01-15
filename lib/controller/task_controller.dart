@@ -59,9 +59,10 @@ class TaskController extends ChangeNotifier {
         task.notified = true; 
         storageService.saveTasks(tasks);
         }
-        
+      }
+    }    
   
-    });
+    );
   }
 
   @override
