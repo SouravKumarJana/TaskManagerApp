@@ -6,29 +6,28 @@ plugins {
 
 android {
     namespace = "com.example.flutter_application_3"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        // Fix for flutter_local_notifications
+        // Required for flutter_local_notifications
         isCoreLibraryDesugaringEnabled = true
-        
+
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 
     defaultConfig {
         applicationId = "com.example.flutter_application_3"
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        
-        // Required when using desugaring
+        targetSdk = 36
+
         multiDexEnabled = true
-        
+
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
@@ -39,6 +38,7 @@ android {
         }
     }
 }
+
 
 flutter {
     source = "../.."

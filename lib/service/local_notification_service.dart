@@ -1,29 +1,52 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
-  static final _notifications = FlutterLocalNotificationsPlugin();
+  static final FlutterLocalNotificationsPlugin _plugin =
+      FlutterLocalNotificationsPlugin();
 
   static Future<void> init() async {
-    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const settings = InitializationSettings(android: android);
-    await _notifications.initialize(settings);
+    tz.initializeTimeZones();
+
+    const androidInit =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const initSettings =
+        InitializationSettings(android: androidInit);
+
+    await _plugin.initialize(initSettings);
+
   }
 
-  static Future<void> showNotification(String title, String body) async {
-    const androidDetails = AndroidNotificationDetails(
-      'task_channel',
-      'Task Notifications',
-      importance: Importance.max,
-      priority: Priority.high,
-    );
+  static Future<void> schedule({
+    required int id,
+    required String title,
+    required DateTime dateTime,
+  }) async {
+    if (dateTime.isBefore(DateTime.now())) return;
 
-    const details = NotificationDetails(android: androidDetails);
-
-    await _notifications.show(
-      DateTime.now().millisecondsSinceEpoch ~/ 1000,
+    await _plugin.zonedSchedule(
+      id,
+      'Task Due',
       title,
-      body,
-      details,
+      tz.TZDateTime.from(dateTime, tz.local),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'task_channel',
+          'Task Notifications',
+          channelDescription: 'Task due reminders',
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
     );
+  }
+
+  static Future<void> cancel(int id) async {
+    await _plugin.cancel(id);
   }
 }
