@@ -7,17 +7,13 @@ class TaskStorageService {
 
   Future<void> saveTasks(List<Task> tasks) async {
     final prefs = await SharedPreferences.getInstance();
-    final jsonList = tasks.map((e) => e.toJson()).toList();
-    await prefs.setString(_key, jsonEncode(jsonList));
+    final data = tasks.map((e) => jsonEncode(e.toJson())).toList();
+    await prefs.setStringList(_key, data);
   }
 
   Future<List<Task>> loadTasks() async {
     final prefs = await SharedPreferences.getInstance();
-    final data = prefs.getString(_key);
-
-    if (data == null) return [];
-
-    final list = jsonDecode(data) as List;
-    return list.map((e) => Task.fromJson(e)).toList();
+    final data = prefs.getStringList(_key) ?? [];
+    return data.map((e) => Task.fromJson(jsonDecode(e))).toList();
   }
 }
