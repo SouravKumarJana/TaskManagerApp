@@ -1,16 +1,14 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotificationService {
-  static final _plugin = FlutterLocalNotificationsPlugin();
+  static final FlutterLocalNotificationsPlugin _plugin =
+      FlutterLocalNotificationsPlugin();
 
   static Future<void> init() async {
-    const androidInit =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const settings = InitializationSettings(android: android);
 
-    const initSettings =
-        InitializationSettings(android: androidInit);
-
-    await _plugin.initialize(initSettings);
+    await _plugin.initialize(settings);
   }
 
   static Future<void> show({
@@ -18,7 +16,7 @@ class LocalNotificationService {
     required String title,
     required String body,
   }) async {
-    const androidDetails = AndroidNotificationDetails(
+    const android = AndroidNotificationDetails(
       'task_channel',
       'Task Notifications',
       importance: Importance.high,
@@ -29,7 +27,7 @@ class LocalNotificationService {
       id,
       title,
       body,
-      const NotificationDetails(android: androidDetails),
+      const NotificationDetails(android: android),
     );
   }
 }

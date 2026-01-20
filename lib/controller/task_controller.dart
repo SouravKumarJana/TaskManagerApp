@@ -43,10 +43,7 @@ class TaskController extends ChangeNotifier {
     }
 
     task.completed = value;
-
-    if (value) {
-      task.notified = true; // stop notification
-    }
+    task.notified = value;
 
     storage.saveTasks(tasks);
     notifyListeners();
@@ -62,6 +59,7 @@ class TaskController extends ChangeNotifier {
         if (!task.completed &&
             !task.notified &&
             now.isAfter(task.dueTime)) {
+          //print(' Notifying task: ${task.title}');
           NotificationController.notifyTask(task);
           task.notified = true;
         }
